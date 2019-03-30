@@ -1,0 +1,28 @@
+D:\University\2nd year\Spring 2019\Networks\Innometrics\NEW\InnoMetricsWin\InnoMetricsWin\obj\Debug\InnoMetricsWin.csprojAssemblyReference.cache
+D:\University\2nd year\Spring 2019\Networks\Innometrics\NEW\InnoMetricsWin\InnoMetricsWin\obj\Debug\InnoMetricsWin.csproj.CoreCompileInputs.cache
+D:\University\2nd year\Spring 2019\Networks\Innometrics\NEW\InnoMetricsWin\InnoMetricsWin\bin\Debug\InnoMetricsWin.exe.config
+D:\University\2nd year\Spring 2019\Networks\Innometrics\NEW\InnoMetricsWin\InnoMetricsWin\bin\Debug\InnoMetricsWin.exe
+D:\University\2nd year\Spring 2019\Networks\Innometrics\NEW\InnoMetricsWin\InnoMetricsWin\bin\Debug\InnoMetricsWin.pdb
+D:\University\2nd year\Spring 2019\Networks\Innometrics\NEW\InnoMetricsWin\InnoMetricsWin\bin\Debug\Newtonsoft.Json.dll
+D:\University\2nd year\Spring 2019\Networks\Innometrics\NEW\InnoMetricsWin\InnoMetricsWin\bin\Debug\System.Net.Http.Extensions.dll
+D:\University\2nd year\Spring 2019\Networks\Innometrics\NEW\InnoMetricsWin\InnoMetricsWin\bin\Debug\System.Net.Http.Formatting.dll
+D:\University\2nd year\Spring 2019\Networks\Innometrics\NEW\InnoMetricsWin\InnoMetricsWin\bin\Debug\System.Net.Http.Primitives.dll
+D:\University\2nd year\Spring 2019\Networks\Innometrics\NEW\InnoMetricsWin\InnoMetricsWin\bin\Debug\Newtonsoft.Json.pdb
+D:\University\2nd year\Spring 2019\Networks\Innometrics\NEW\InnoMetricsWin\InnoMetricsWin\bin\Debug\Newtonsoft.Json.xml
+D:\University\2nd year\Spring 2019\Networks\Innometrics\NEW\InnoMetricsWin\InnoMetricsWin\obj\Debug\InnoMetricsWin.csproj.CopyComplete
+D:\University\2nd year\Spring 2019\Networks\Innometrics\NEW\InnoMetricsWin\InnoMetricsWin\obj\Debug\InnoMetricsWin.exe
+D:\University\2nd year\Spring 2019\Networks\Innometrics\NEW\InnoMetricsWin\InnoMetricsWin\obj\Debug\InnoMetricsWin.pdb
+C:\Users\aliek\OneDrive\Рабочий стол\InnoMetricsWin\InnoMetricsWin\bin\Debug\InnoMetricsWin.exe.config
+C:\Users\aliek\OneDrive\Рабочий стол\InnoMetricsWin\InnoMetricsWin\bin\Debug\InnoMetricsWin.exe
+C:\Users\aliek\OneDrive\Рабочий стол\InnoMetricsWin\InnoMetricsWin\bin\Debug\InnoMetricsWin.pdb
+C:\Users\aliek\OneDrive\Рабочий стол\InnoMetricsWin\InnoMetricsWin\bin\Debug\Newtonsoft.Json.dll
+C:\Users\aliek\OneDrive\Рабочий стол\InnoMetricsWin\InnoMetricsWin\bin\Debug\System.Net.Http.Extensions.dll
+C:\Users\aliek\OneDrive\Рабочий стол\InnoMetricsWin\InnoMetricsWin\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\aliek\OneDrive\Рабочий стол\InnoMetricsWin\InnoMetricsWin\bin\Debug\System.Net.Http.Primitives.dll
+C:\Users\aliek\OneDrive\Рабочий стол\InnoMetricsWin\InnoMetricsWin\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\aliek\OneDrive\Рабочий стол\InnoMetricsWin\InnoMetricsWin\bin\Debug\Newtonsoft.Json.xml
+C:\Users\aliek\OneDrive\Рабочий стол\InnoMetricsWin\InnoMetricsWin\obj\Debug\InnoMetricsWin.csprojAssemblyReference.cache
+C:\Users\aliek\OneDrive\Рабочий стол\InnoMetricsWin\InnoMetricsWin\obj\Debug\InnoMetricsWin.csproj.CoreCompileInputs.cache
+C:\Users\aliek\OneDrive\Рабочий стол\InnoMetricsWin\InnoMetricsWin\obj\Debug\InnoMetricsWin.csproj.CopyComplete
+C:\Users\aliek\OneDrive\Рабочий стол\InnoMetricsWin\InnoMetricsWin\obj\Debug\InnoMetricsWin.exe
+C:\Users\aliek\OneDrive\Рабочий стол\InnoMetricsWin\InnoMetricsWin\obj\Debug\InnoMetricsWin.pdb
