@@ -27,8 +27,7 @@ namespace ConsoleApp1
             {
                 throw new HttpRequestException();
             }
-            // Uri uri = new Uri("http://10.90.137.225");
-            Uri uri = new Uri("http://192.168.1.226");
+            Uri uri = new Uri("http://10.90.137.225");
             IEnumerable<Cookie> responseCookies = cookies.GetCookies(uri).Cast<Cookie>();
             string[] stringArray = new string[2];
             foreach (Cookie cookie in responseCookies)
@@ -65,8 +64,7 @@ namespace ConsoleApp1
         public static void SetUp()
         {
             // Update port # in the following line.
-            // client.BaseAddress = new Uri("http://10.90.137.225:8120");
-            client.BaseAddress = new Uri("http://192.168.1.226:8120");
+            client.BaseAddress = new Uri("http://10.90.137.225:8120");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
