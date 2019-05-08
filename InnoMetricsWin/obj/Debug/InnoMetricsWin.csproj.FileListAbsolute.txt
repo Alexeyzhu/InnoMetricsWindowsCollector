@@ -26,3 +26,19 @@ C:\Users\aliek\OneDrive\Рабочий стол\InnoMetricsWin\InnoMetricsWin\ob
 C:\Users\aliek\OneDrive\Рабочий стол\InnoMetricsWin\InnoMetricsWin\obj\Debug\InnoMetricsWin.csproj.CopyComplete
 C:\Users\aliek\OneDrive\Рабочий стол\InnoMetricsWin\InnoMetricsWin\obj\Debug\InnoMetricsWin.exe
 C:\Users\aliek\OneDrive\Рабочий стол\InnoMetricsWin\InnoMetricsWin\obj\Debug\InnoMetricsWin.pdb
+C:\Users\aliek\Source\Repos\InnoMetricsWindowsCollector\InnoMetricsWin\bin\Debug\InnoMetricsWin.exe.config
+C:\Users\aliek\Source\Repos\InnoMetricsWindowsCollector\InnoMetricsWin\bin\Debug\InnoMetricsWin.exe
+C:\Users\aliek\Source\Repos\InnoMetricsWindowsCollector\InnoMetricsWin\bin\Debug\InnoMetricsWin.pdb
+C:\Users\aliek\Source\Repos\InnoMetricsWindowsCollector\InnoMetricsWin\bin\Debug\Newtonsoft.Json.dll
+C:\Users\aliek\Source\Repos\InnoMetricsWindowsCollector\InnoMetricsWin\bin\Debug\System.Net.Http.Extensions.dll
+C:\Users\aliek\Source\Repos\InnoMetricsWindowsCollector\InnoMetricsWin\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\aliek\Source\Repos\InnoMetricsWindowsCollector\InnoMetricsWin\bin\Debug\System.Net.Http.Primitives.dll
+C:\Users\aliek\Source\Repos\InnoMetricsWindowsCollector\InnoMetricsWin\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\aliek\Source\Repos\InnoMetricsWindowsCollector\InnoMetricsWin\bin\Debug\Newtonsoft.Json.xml
+C:\Users\aliek\Source\Repos\InnoMetricsWindowsCollector\InnoMetricsWin\obj\Debug\InnoMetricsWin.csprojAssemblyReference.cache
+C:\Users\aliek\Source\Repos\InnoMetricsWindowsCollector\InnoMetricsWin\obj\Debug\InnoMetricsWin.csproj.CoreCompileInputs.cache
+C:\Users\aliek\Source\Repos\InnoMetricsWindowsCollector\InnoMetricsWin\obj\Debug\InnoMetricsWin.csproj.CopyComplete
+C:\Users\aliek\Source\Repos\InnoMetricsWindowsCollector\InnoMetricsWin\obj\Debug\InnoMetricsWin.exe
+C:\Users\aliek\Source\Repos\InnoMetricsWindowsCollector\InnoMetricsWin\obj\Debug\InnoMetricsWin.pdb
+C:\Users\aliek\Source\Repos\InnoMetricsWindowsCollector\InnoMetricsWin\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\aliek\Source\Repos\InnoMetricsWindowsCollector\InnoMetricsWin\bin\Debug\BouncyCastle.Crypto.xml

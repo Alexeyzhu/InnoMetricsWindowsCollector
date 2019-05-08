@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Text;
-using System.Threading.Tasks;
+using System.Security.Cryptography;
 using System.Runtime.InteropServices;
 
 namespace ConsoleApp1
@@ -14,9 +13,12 @@ namespace ConsoleApp1
         {
 
             string path = System.Environment.CurrentDirectory + @"\session.txt";
-            string session, password, name, lastName, email;
+            string pathKey = System.Environment.CurrentDirectory + @"\key.pem";
+            string session, password, name, lastName, email, publicKey = "";
+            string[] sessionArray;
             string currentActivity = "", newActivity = "";
             string browserUrl = "";
+            string executableName = "";
             bool canProceed = true;
             long startTime, endTime;
             MyHttpClient.SetUp();
@@ -27,6 +29,8 @@ namespace ConsoleApp1
                 {
                     System.IO.StreamReader file = new System.IO.StreamReader(path);
                     session = file.ReadLine();
+                    System.IO.StreamReader fileKey = new System.IO.StreamReader(pathKey);
+                    publicKey = file.ReadLine();
                 }
                 else
                 {
@@ -39,17 +43,38 @@ namespace ConsoleApp1
                     email = Console.ReadLine();
                     Console.Write("Password: ");
                     password = ReadPassword();
-                    //Console.WriteLine("The password was " + password);
                     Console.WriteLine();
+                    
+                    int HASH_SIZE = 64; // size in bytes
+                    int ITERATIONS = 10000; // number of pbkdf2 iterations
+
+                    // Generate a salt
+                    RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider();
+                    byte[] salt = Encoding.ASCII.GetBytes(email);
+
+                    // Generate the hash
+                    Rfc2898DeriveBytes pbkdf2 = new Rfc2898DeriveBytes(password, salt, ITERATIONS);
+
                     User user = new User
                     {
                         Name = name,
                         LastName = lastName,
                         Email = email,
-                        Password = password
+                        Password = BitConverter.ToString(pbkdf2.GetBytes(HASH_SIZE)).Replace("-", string.Empty).ToLower()
                     };
-                    session = MyHttpClient.CreateUserAsync(user).Result;
-                    System.IO.File.WriteAllText(path, session);
+                    sessionArray = MyHttpClient.CreateUserAsync(user).Result;
+                    session = sessionArray[0];
+                    publicKey = sessionArray[1];
+
+                    using (StreamWriter sw = File.CreateText(path))
+                    {
+                        sw.WriteLine(session);
+                    }
+
+                    using (StreamWriter sws = File.CreateText(pathKey))
+                    {
+                        sws.WriteLine(publicKey);
+                    }
                 }
 
             }
@@ -74,7 +99,9 @@ namespace ConsoleApp1
                 Console.WriteLine("There was a mistake during read/write of session file try to run the app again");
                 Console.ReadLine();
             }
+
             //ShowWindow(consoleHandle, SW_HIDE);
+
             if (canProceed)
             {
                 Console.WriteLine("Now activity data is being sent to web server. You can minimize this window. \nIf you want to stop data collection/transmission close this window");
@@ -85,25 +112,44 @@ namespace ConsoleApp1
                 }
                 catch
                 {
-
+                    Console.WriteLine("Cannot fetch current Window title");
                 }
+
 
                 while (true)
                 {
-                    try
+                  try
                     {
-                        browserUrl = "";
-                        //Console.WriteLine(GetActiveWindowTitle());
+                        browserUrl = "None";
+                        executableName = "None";
+
                         newActivity = GetActiveWindowTitle();
                         if (!currentActivity.Equals(newActivity))
                         {
                             currentActivity = newActivity;
+
                             endTime = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
-                            //Console.WriteLine(currentActivity);
+
+                            AesCryptoServiceProvider myAes = new AesCryptoServiceProvider();
+                            myAes.Mode = System.Security.Cryptography.CipherMode.CBC;
+
+                            RSAcust rsa = new RSAcust();
+
+                            byte[] startTimeBytes = AesGcm256.EncryptStringToBytes_Aes(startTime.ToString(), myAes.Key, myAes.IV);
+                            byte[] currectActivityBytes = AesGcm256.EncryptStringToBytes_Aes(currentActivity, myAes.Key, myAes.IV);
+                            byte[] endTimeBytes = AesGcm256.EncryptStringToBytes_Aes(endTime.ToString(), myAes.Key, myAes.IV);
+                            byte[] encRsaEnc = rsa.RSA_Encrypt(myAes.Key, pathKey);
+
+                            string encKeyUn = BitConverter.ToString(encRsaEnc).Replace("-", string.Empty).ToLower();
+                            string inVectorUn = BitConverter.ToString(myAes.IV).Replace("-", string.Empty).ToLower();
+                            string exName = BitConverter.ToString(currectActivityBytes).Replace("-", string.Empty).ToLower();
+
                             Activity activity = new Activity
                             {
+                                EncKey = encKeyUn,
+                                IV = inVectorUn,
                                 StartTime = startTime.ToString(),
-                                ExecutableName = currentActivity,
+                                ExecutableName = exName,
                                 EndTime = endTime.ToString(),
                                 BrowserUrl = "",
                                 BrowserTitle = "",
@@ -111,35 +157,48 @@ namespace ConsoleApp1
                                 MacAddress = ""
                             };
 
-
                             if (currentActivity.EndsWith("Mozilla Firefox"))
                             {
                                 browserUrl = currentActivity.Substring(0, currentActivity.Length - 18);
-                                activity.BrowserTitle = browserUrl;
-                                activity.ExecutableName = "Mozilla Firefox";
-                                activity.BrowserUrl = browserUrl;
 
+                                byte[] browseUrlBytes = AesGcm256.EncryptStringToBytes_Aes(browserUrl, myAes.Key, myAes.IV);
+                                activity.BrowserTitle = BitConverter.ToString(browseUrlBytes).Replace("-", string.Empty).ToLower();
+                                activity.BrowserUrl = BitConverter.ToString(browseUrlBytes).Replace("-", string.Empty).ToLower();
+
+                                executableName = "Mozilla Firefox";
+
+                                byte[] executableNameBytes = AesGcm256.EncryptStringToBytes_Aes(executableName, myAes.Key, myAes.IV);
+                                activity.ExecutableName = BitConverter.ToString(executableNameBytes).Replace("-", string.Empty).ToLower();
                             }
                             else if (currentActivity.EndsWith("Google Chrome"))
                             {
                                 browserUrl = currentActivity.Substring(0, currentActivity.Length - 16);
-                                activity.BrowserTitle = browserUrl;
-                                activity.ExecutableName = "Google Chrome";
-                                activity.BrowserUrl = browserUrl;
 
+                                byte[] browseUrlBytes = AesGcm256.EncryptStringToBytes_Aes(browserUrl, myAes.Key, myAes.IV);
+                                activity.BrowserTitle = BitConverter.ToString(browseUrlBytes).Replace("-", string.Empty).ToLower();
+                                activity.BrowserUrl = BitConverter.ToString(browseUrlBytes).Replace("-", string.Empty).ToLower();
+
+                                executableName = "Google Chrome";
+
+                                byte[] executableNameBytes = AesGcm256.EncryptStringToBytes_Aes(executableName, myAes.Key, myAes.IV);
+                                activity.ExecutableName = BitConverter.ToString(executableNameBytes).Replace("-", string.Empty).ToLower();
                             }
                             else if (currentActivity.EndsWith("Microsoft Edge"))
                             {
                                 browserUrl = currentActivity.Substring(0, currentActivity.Length - 17);
-                                activity.BrowserTitle = browserUrl;
-                                activity.ExecutableName = "Microsoft Edge";
-                                activity.BrowserUrl = browserUrl;
 
+                                byte[] browseUrlBytes = AesGcm256.EncryptStringToBytes_Aes(browserUrl, myAes.Key, myAes.IV);
+                                activity.BrowserTitle = BitConverter.ToString(browseUrlBytes).Replace("-", string.Empty).ToLower();
+                                activity.BrowserUrl = BitConverter.ToString(browseUrlBytes).Replace("-", string.Empty).ToLower();
+
+                                executableName = "Microsoft Edge";
+
+                                byte[] executableNameBytes = AesGcm256.EncryptStringToBytes_Aes(executableName, myAes.Key, myAes.IV);
+                                activity.ExecutableName = BitConverter.ToString(executableNameBytes).Replace("-", string.Empty).ToLower();
                             }
+
                             startTime = endTime;
-                            //string logPath = System.Environment.CurrentDirectory + @"\log.txt";
-                            //System.IO.File.WriteAllText(path, activity.ExecutableName);
-                            //Console.WriteLine(activity.ExecutableName);
+                            
                             MyHttpClient.SendActivityAsync(activity, session);
 
                         }
@@ -147,7 +206,7 @@ namespace ConsoleApp1
                     }
                     catch
                     {
-
+                       Console.WriteLine("Failed to gather the information");
                     }
                 }
             }
@@ -155,10 +214,10 @@ namespace ConsoleApp1
 
 
 
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        [System.Runtime.InteropServices.DllImport("user32.dll", CharSet = CharSet.Unicode)]
         static extern IntPtr GetForegroundWindow();
 
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        [System.Runtime.InteropServices.DllImport("user32.dll", CharSet = CharSet.Unicode)]
         static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
 
         private static string GetActiveWindowTitle()

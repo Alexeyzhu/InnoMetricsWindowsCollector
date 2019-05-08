@@ -1,14 +1,15 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
     public class Activity
     {
+        [JsonProperty("enc_key_h")]
+        public string EncKey { get; set; }
+
+        [JsonProperty("iv")]
+        public string IV { get; set; }
+
         [JsonProperty("start_time")]
         public string StartTime { get; set; }
 
